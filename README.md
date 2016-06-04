@@ -12,5 +12,5 @@ NXcrypt is a  anti-virus evasion tool .
  -sudo ./nxcrypto.py --help # nxcrypt help
 
 - NXcrypt can not encrypt file 2 time 
--in linux distros , run it as root
+- in linux distros , run it as root
 - NXcrypt encrypted outputs are 99% FUD  
