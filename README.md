@@ -11,6 +11,5 @@ NXcrypt is a  anti-virus evasion tool .
 - sudo ./nxcrypt.py --file=backdoor.py # encrypt backdoor.py and default output file  is backdoor.py but you can edit it in source code
  -sudo ./nxcrypto.py --help # nxcrypt help
 
-- NXcrypt can not encrypt file 2 time
-- in linux distros , run it as root
+- NXcrypt can not encrypt file 2 time -in linux distros , run it as root
 - NXcrypt encrypted outputs are 99% FUD  
