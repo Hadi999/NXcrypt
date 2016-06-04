@@ -74,9 +74,9 @@ elif  option.file :
 			print (name)
 			
 		try:
-			py_compile.compile(payload, cfile=_byte_, dfile=None, doraise=False, )
+			py_compile.compile(payload, cfile=_byte_, dfile=None, doraise=False, ) #compilation
 		except (py_compile.PyCompileError,IOError,TypeError) :
-			sys.exit("encryption error :  file  {} don't exist or it's already crypted ".format(option.file))
+			sys.exit("encryption error :  file  {} don't exist or it's already crypted ".format(option.file)) #error
 		print ("[*] file : {}".format(option.file))
 		print ("[*] default output : {}".format(_output_))
 		if (sys.platform.startswith("linux"))  :
