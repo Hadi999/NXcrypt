@@ -2,7 +2,8 @@
 
 NXcrypt is a python backdoors , payloads crypter written in python by Hadi Tux (had3s) .
 the output backdoors are fully undetectable .
-NXcrypt is a  anti-virus evasion tool
+
+NXcrypt is a  anti-virus evasion tool .
 
 # Usage :
 
