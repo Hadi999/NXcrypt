@@ -14,11 +14,11 @@ The output  is fully undetectable .
  
  # How it work ? 
  
- -NXcrypt add some junkcode .
- -NXcrypt use a python internal module 'py_compile' who compile the code into bytecode to a .pyc file .
- -NXcrypt convert .pyc file into normal .py file .
- -And with this way we can obfuscate the code
- -The md5sum will change too
+ - NXcrypt add some junkcode .
+ - NXcrypt use a python internal module 'py_compile' who compile the code into bytecode to a .pyc file .
+ - NXcrypt convert .pyc file into normal .py file .
+ - And with this way we can obfuscate the code
+ - The md5sum will change too
  
  
  # Test with Virustotal
