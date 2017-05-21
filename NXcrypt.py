@@ -264,7 +264,11 @@ if (sys.platform.startswith("linux")) :
 		pass
 else:
     pass
-    
+ 
+
+d = 1
+p = random.randint(9,20)
+
 
 #menu     
 menu = """
@@ -304,6 +308,33 @@ if not option.file :
 	sys.exit()
 elif  option.file :
 	payload = (option.file)
+
+	didi = open(payload,'r')
+	hades = didi.read()
+	didi.close()
+
+
+	hd = open(payload,'w')
+	while (d) != (p) :
+		hd.write(random.choice(stringo))
+		d += 1
+	hd.close()
+
+	albania = open(payload,'a')
+	albania.write(hades)
+	albania.close()
+
+	india = open(payload,'a')
+
+	d = 1
+	p = random.randint(9,20)
+
+
+	while (d) != (p) :
+		india.write(random.choice(stringo))
+		d += 1
+	india.close()  
+
 	
 	if (sys.platform.startswith("linux")) :
 		print (menu_linux)
@@ -330,9 +361,9 @@ elif  option.file :
 		elif (sys.platform.startswith("darwin")):
 			os.system(" mv {}  {} ".format(_byte_,_output_))
 		ok =  open(_output_,'a')
+
 		d = 1
 		p = random.randint(9,20)
-
 		while (d) != (p) :
 			ok.write(random.choice(stringo))
 			d += 1
@@ -356,6 +387,7 @@ elif  option.file :
 		elif (sys.platform.startswith("darwin")):
 			os.system("mv {}  {} ".format(bytecode,output))	
 		ok =  open(_output_,'a')
+		
 		d = 1
 		p = random.randint(9,20)
 
