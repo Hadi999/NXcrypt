@@ -349,7 +349,7 @@ elif  option.file :
 		try:
 			py_compile.compile(payload, cfile=_byte_, dfile=None, doraise=False, ) #compilation
 		except (py_compile.PyCompileError,IOError,TypeError) :
-			sys.exit("encryption error :  file  {} don't exist or it's already crypted ".format(option.file)) #error
+			sys.exit("encryption error :  file  {} don't exist or it's already crypted  or specify the full path (Ex:/root/backdoor/listener.py".format(option.file)) #error
 		print ("[*] file : {}".format(option.file))
 		print ("[*] default output : {}".format(_output_))
 		if (sys.platform.startswith("linux"))  :
@@ -360,13 +360,7 @@ elif  option.file :
 			
 		elif (sys.platform.startswith("darwin")):
 			os.system(" mv {}  {} ".format(_byte_,_output_))
-		ok =  open(_output_,'a')
 
-		d = 1
-		p = random.randint(9,20)
-		while (d) != (p) :
-			ok.write(random.choice(stringo))
-			d += 1
 		print ("[+] encryption finished  100% ")
 		print time.strftime('[*] time : %H:%M ',time.localtime()) 
 		print time.strftime('[*] date :%d/%m/%y ',time.localtime())
@@ -379,21 +373,14 @@ elif  option.file :
 		try :
 			py_compile.compile(payload, cfile=bytecode, dfile=None, doraise=False, ) #compilation
 		except (py_compile.PyCompileError,IOError,TypeError) :
-			sys.exit("encryption error : file don't exist or it's already crypted ")
+			sys.exit("encryption error : file don't exist or it's already crypted  or specify the full path (Ex:/root/backdoor/listener.py")
 		if (sys.platform.startswith("linux")):
 			os.system("mv {}  {} ".format(bytecode,output))
 		elif (sys.platform.startswith("windows")):
 			os.system("rename {}  {} ".format(bytecode,output))
 		elif (sys.platform.startswith("darwin")):
 			os.system("mv {}  {} ".format(bytecode,output))	
-		ok =  open(_output_,'a')
 		
-		d = 1
-		p = random.randint(9,20)
-
-		while (d) != (p) :
-			ok.write(random.choice(stringo))
-			d += 1
 		print ("[+] encryption finished 100% ")
 		print time.strftime('[*] time : %H:%M ',time.localtime()) 
 		print time.strftime('[*] date :%d/%m/%y ',time.localtime())
