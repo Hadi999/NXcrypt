@@ -39,7 +39,12 @@ Detection ratio:	0 / 55
 # Credits
 
 All Credits go to Suspicious Shell Activity team
- 
+
+# Video Tutorial
+
+https://www.youtube.com/watch?v=s8Krngv2z9Q
+
+
  
  
 
