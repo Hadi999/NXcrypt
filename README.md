@@ -14,7 +14,7 @@ The output  is fully undetectable .
 
 Encryption Module
 
-![Alt text](https://i.imgur.com/Z8QcQqS.png "Encryption Module ")
+![Alt text](https://i.imgur.com/advuJ0H.png "Encryption Module ")
 
 
 # Usage :
