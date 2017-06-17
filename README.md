@@ -1,14 +1,15 @@
 # NXcrypt
 
-NXcrypt is a polymorphic 'python backdoors' crypter written in python by Hadi Mene (h4d3s) .
+- NXcrypt is a polymorphic 'python backdoors' crypter written in python by Hadi Mene (h4d3s) .
 The output  is fully undetectable .
-NXcrypt can inject malicious python file in a output executed in the same time with a normal file
 
-- In Linux , run it as root
-- NXcrypt encrypted output is 99% FUD
+- NXcrypt can inject malicious python file into  a normal file with multi-threading system .
 
+- Run it with superuser's permissions .
+- NXcrypt output is Fully undetectable  .
 
-![Alt text](https://i.imgur.com/paJzgHT.png )
+ 
+![Alt text](https://i.imgur.com/paJzgHT.png "Backdooring module")
 
 # Usage :
 
@@ -26,8 +27,9 @@ NXcrypt can inject malicious python file in a output executed in the same time w
  - And in this way we can obfuscate the code
  - The md5sum will change too
  
-Injection  module
-- it inject a malicious python file  into a normal file injected in the same time and  save into an output with multi-threading system
+Injection  module :
+
+- it inject a malicious python file  into a normal file with multi-threading system .
 
  # Test with Virustotal
  
@@ -37,12 +39,12 @@ SHA256:	e2acceb6158cf406669ab828d338982411a0e5c5876c2f2783e247b3e01c2163
 File name:	facebook.py
 Detection ratio:	2 / 54
 
-After :
+After  :
 
 SHA256:	362a4b19d53d1a8f2b91491b47dba28923dfec2d90784961c46213bdadc80add
 File name:	facebook_encrypted.py
 Detection ratio:	0 / 55
-
+, injected in the same time and  save into an output 
 
 # Credits
 
