@@ -5,7 +5,10 @@ The output  is fully undetectable .
 NXcrypt can inject malicious python file in a output executed in the same time with a normal file
 
 - In Linux , run it as root
-- NXcrypt encrypted output is 99% FUD 
+- NXcrypt encrypted output is 99% FUD
+
+
+![Alt text](https://i.imgur.com/paJzgHT.png )
 
 # Usage :
 
