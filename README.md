@@ -8,8 +8,14 @@ The output  is fully undetectable .
 - Run it with superuser's permissions .
 - NXcrypt output is Fully undetectable  .
 
+ Backdooring Module :
  
 ![Alt text](https://i.imgur.com/paJzgHT.png "Backdooring module")
+
+Encryption Module
+
+![Alt text](https://i.imgur.com/Z8QcQqS.png "Encryption Module ")
+
 
 # Usage :
 
@@ -17,9 +23,10 @@ The output  is fully undetectable .
 - sudo ./NXcrypt.py --file=shell.py # encrypt shell.py and default output file  is backdoor.py but you can edit it in source code
  - sudo ./NXcrypt.py --help # NXcrypt help
  - sudo ./NXcrypt.py --backdoor-file=payload.py --file=test.py --output=hacked.py # inject payload.py with  test.py into hacked.py with multi-threading system
+ 
  # How it work ? 
  
- Encryption module :
+ * Encryption module :
  
  - NXcrypt add some junkcode .
  - NXcrypt use a python internal module 'py_compile' who compile the code into bytecode to a .pyc file .
@@ -27,13 +34,13 @@ The output  is fully undetectable .
  - And in this way we can obfuscate the code
  - The md5sum will change too
  
-Injection  module :
+* Injection  module :
 
 - it inject a malicious python file  into a normal file with multi-threading system .
 
  # Test with Virustotal
  
- Before :
+Before :
  
 SHA256:	e2acceb6158cf406669ab828d338982411a0e5c5876c2f2783e247b3e01c2163
 File name:	facebook.py
