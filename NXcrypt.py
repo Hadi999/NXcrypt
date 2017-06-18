@@ -29,6 +29,7 @@ import os
 import commands
 import time
 import random
+import random
 
 error = '\033[37;41m'
 error1 = '\033[1;m'
@@ -36,6 +37,9 @@ error1 = '\033[1;m'
 sucess = '\033[32m'
 sucess1 = '\033[37m'
 
+troll = ['\033[1;36m','\033[1;34m','\033[1;33m']
+
+colored = random.choice(troll)
 
 text = """
 
@@ -299,7 +303,7 @@ VP   V8P YP    YP  `Y88P' 88   YD    YP    88         YP
                                         Codename 'WannaLaugh'
 
        """
-menu_linux = "\033[1;34m" + (menu) + "\033[1;m"
+menu_linux = (colored) + (menu) + (colored)
 
 name = """
 ------------------------------------------------
