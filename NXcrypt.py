@@ -29,7 +29,7 @@ import os
 import commands
 import time
 import random
-import random
+
 
 error = '\033[37;41m'
 error1 = '\033[1;m'
