@@ -51,7 +51,7 @@ After  :
 SHA256:	362a4b19d53d1a8f2b91491b47dba28923dfec2d90784961c46213bdadc80add
 File name:	facebook_encrypted.py
 Detection ratio:	0 / 55
-, injected in the same time and  save into an output 
+
 
 # Credits
 
