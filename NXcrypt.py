@@ -44,8 +44,8 @@ def fuzz():
 	return junk;
 
 
-pyjunk = str(fuzz())
-pyjunk2 = str(string_generator())
+pyjunk = "'''\n" + (str(fuzz())) + "\n" + "'''\n"
+pyjunk2 = "'''\n" + (str(string_generator())) + "\n" + "'''\n" 
 
 error = '\033[37;41m'
 error1 = '\033[1;m'
