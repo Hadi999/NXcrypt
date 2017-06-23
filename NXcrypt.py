@@ -31,6 +31,14 @@ import time
 import random
 
 
+def fuzz():
+	seed = random.randrange(3000,9000)
+	junk = random.getrandbits(seed)	
+	return junk;
+
+
+pyjunk = str(fuzz())
+
 error = '\033[37;41m'
 error1 = '\033[1;m'
 
@@ -269,7 +277,7 @@ NcPjjBvjld4EM+nuFCY6C62819jmD/jQ2FzA5hMiPne4tGb+JLO5cAg=
 '''
 
 """
-stringo = [rsa,rsa1,lorem,text]
+stringo = [rsa,rsa1,lorem,text,pyjunk]
 _output_ = "backdoor.py" # edit this line is you want edit default output .
 _byte_ = (_output_) + "c" # bytecode format
 
